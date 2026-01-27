@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin-top: 5px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            margin-top: 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create Product</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Image</label>
+        <input type="file" name="image" required>
+
+        <label>Title</label>
+        <input type="text" name="title" required>
+
+        <label>Make Company</label>
+        <input type="text" name="make_company" required>
+
+        <label>Composition</label>
+        <input type="text" name="composition">
+
+        <label>Make Year</label>
+        <input type="date" name="make_year" required>
+
+        <label>Limit Year</label>
+        <input type="date" name="limit_year" required>
+
+        <label>Description</label>
+        <textarea name="desc" rows="4"></textarea>
+
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+</body>
+</html>

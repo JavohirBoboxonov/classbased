@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Description</h2>
+    <ul>
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.title }}" style="width: 200px;">
+        {% endif %}
+        <li>{{product.title}}</li>
+        <li>{{product.make_company}}</li>
+        <li>{{product.composition}}</li>
+        <li>{{product.make_year}}</li>
+        <li>{{product.limit_year}}</li>
+        <li>{{product.desc}}</li>
+        <a href="{% url 'update' product.id %}">O`zgartirish</a>
+        <a href="{% url 'delete' product.id %}">O`chirish</a>
+    </ul>
+</body>
+</html>

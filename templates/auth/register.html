@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro'yxatdan o'tish</title>
+    <style>
+        /* Umumiy ko'rinish */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Forma konteyneri */
+        .register-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Inputlar uslubi */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box; /* Padding hisobiga kengayib ketmasligi uchun */
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4A90E2;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+        }
+
+        /* Xatolik xabari */
+        .error-message {
+            color: #e74c3c;
+            background-color: #fdeaea;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Tugma uslubi */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        /* Pastki link (ixtiyoriy) */
+        .footer-text {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h2>Xush kelibsiz!</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label>Foydalanuvchi nomi</label>
+            <input name="username" placeholder="Masalan: bekzod01" type="text" value="{{ username }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Email manzili</label>
+            <input name="email" placeholder="example@mail.com" type="email" value="{{ email }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Parol</label>
+            <input name="password" placeholder="********" type="password" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Parolni tasdiqlang</label>
+            <input name="confirm_password" placeholder="********" type="password" required>
+        </div>
+        
+        {% if error %}
+            <div class="error-message">
+                {{ error }}
+            </div>
+        {% endif %}
+        
+        <button type="submit">Ro'yxatdan o'tish</button>
+    </form>
+
+    <div class="footer-text">
+        Profilingiz bormi? <a href="{% url 'login' %}" style="color: #4A90E2; text-decoration: none;">Kirish</a>
+    </div>
+</div>
+
+</body>
+</html>

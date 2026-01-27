@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .top-btn {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .top-btn a {
+            background: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #2196F3;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .card a:hover {
+            background: #1976D2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>🛍 Mahsulotlar Ro‘yxati</h2>
+{% if request.user %}
+    <h2>Muvaqiyatli login qilindi</h2>
+{% endif %}
+<div class="top-btn">
+    <a href="{% url 'create' %}">➕ Mahsulot Qo‘shish</a>
+</div>
+<h2><a href="{% url 'register' %}">Ro`yxatdan o`tish</a></h2>
+<h2><a href="{% url 'logout' %}">Chiqish</a></h2>
+<div class="products">
+    {% for pro in product %}
+        <div class="card">
+            {% if pro.image %}
+                <img src="{{ pro.image.url }}" alt="{{ pro.title }}">
+            {% else %}
+                <img src="https://via.placeholder.com/300x200" alt="No image">
+            {% endif %}
+
+            <h3>{{ pro.title }}</h3>
+
+            <a href="{% url 'detail' pro.id %}">Batafsil</a>
+        </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>
