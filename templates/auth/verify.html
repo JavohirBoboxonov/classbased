@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kodni tasdiqlash</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .otp-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .otp-inputs {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .otp-inputs input {
+            width: 45px;
+            height: 55px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .otp-inputs input:focus {
+            border-color: #4A90E2;
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.2);
+        }
+
+        .otp-inputs input:not(:placeholder-shown) {
+            border-color: #4A90E2;
+            background-color: #f0f7ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        .resend {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #4A90E2;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="otp-card">
+    <h2>Kodni kiriting</h2>
+    <p>Biz sizning Email Pochtangizga 6 xonali tasdiqlash kodini yubordik.</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="otp-inputs" id="otp-inputs">
+            <input type="text" name = "code" maxlength="1" pattern="\d*" inputmode="numeric" required placeholder="·">
+            <input type="text" name = "code" maxlength="1" pattern="\d*" inputmode="numeric" required placeholder="·">
+            <input type="text" name = "code" maxlength="1" pattern="\d*" inputmode="numeric" required placeholder="·">
+            <input type="text" name = "code" maxlength="1" pattern="\d*" inputmode="numeric" required placeholder="·">
+            <input type="text" name = "code" maxlength="1" pattern="\d*" inputmode="numeric" required placeholder="·">
+            <input type="text" name = "code" maxlength="1" pattern="\d*" inputmode="numeric" required placeholder="·">
+        </div>
+
+        <button type="submit">Tasdiqlash</button>
+    </form>
+
+    <a href="#" class="resend">Kodni qayta yuborish</a>
+</div>
+
+<script>
+    const inputs = document.querySelectorAll('#otp-inputs input');
+
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+            if (e.target.value.length === 1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                inputs[index - 1].focus();
+            }
+        });
+    });
+</script>
+
+</body>
+</html> 
